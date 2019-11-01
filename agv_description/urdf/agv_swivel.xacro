@@ -1,0 +1,91 @@
+<?xml version='1.0'?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <property name="M_PI" value="3.1415926535897931" />
+  <xacro:macro name="agv_swivel" params="xyz_swivel rpy_swivel xyz_wheel rpy_wheel side">
+	  
+   <link name='caster_${side}_link'>
+	<collision>
+	  <origin xyz="0 0 0" rpy="0 0 0"/>
+	  <geometry>
+		  <!--<box size="0.8 0.05 0.06"/>-->
+		        <box size="0.0001 0.0001 0.0001"/>
+	  </geometry>
+	</collision>
+    <visual name='caster_${side}_visual'>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <geometry>
+	    <mesh filename="package://agv_description/meshes/Stl-22-06-2018/caster_sviwel.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>	  
+    <inertial>
+      <mass value="0.1"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+  </link>      
+  <joint name="chassis_swivel_${side}_joint" type="continuous">
+    <origin xyz="${xyz_swivel}" rpy="${rpy_swivel}"/>
+    <axis xyz="0 0 1"/>
+    <anchor xyz="0 0 0"/>
+    <limit effort="100" velocity="100" k_velocity="0"/>
+    <joint_properties damping="0.0" friction="0.0"/>
+    <parent link="base_link"/>
+    <child link="caster_${side}_link"/>
+  </joint>    
+  <link name='caster_center_wheel_${side}_link'>
+    <inertial>
+      <mass value="0.1"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.012411765597" ixy="-0.000711733678" ixz="0.00050272983" iyy="0.015218160428" iyz="-0.000004273467" izz="0.011763977943"/>
+    </inertial>
+    <visual name="base_visual">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry name="pioneer_geom">
+        <cylinder radius="0.0001" length="0.0001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 ${-3.1415927/2.0}"/>
+      <geometry>
+        <!--<mesh filename="${meshes}/center_wheel.stl"/>-->
+        <cylinder radius="0.0395" length="0.02"/>
+      </geometry>
+    </collision>  
+  </link>
+  <joint name="swivel_${side}_wheel_center_joint" type="continuous">
+    <origin xyz="${xyz_wheel}" rpy="${rpy_wheel}"/>
+    <axis xyz="0 1 0"/>
+    <anchor xyz="0 0 0"/>
+    <limit effort="100" velocity="100" k_velocity="0"/>
+    <joint_properties damping="0.0" friction="0.0"/>
+    <parent link="caster_${side}_link"/>
+    <child link="caster_center_wheel_${side}_link"/>
+  </joint>    
+  <link name='caster_wheel_${side}_link'>
+	<collision>
+	  <origin xyz="0 0 0" rpy="0 0 0"/>
+	  <geometry>
+		  <!--<box size="0.8 0.05 0.06"/>-->
+        <box size="0.0001 0.0001 0.0001"/>		  
+	  </geometry>
+	</collision>
+    <visual name='caster_wheel_${side}_visual'>
+      <origin xyz="0 0 0" rpy=" 1.570796 1.570796 1.570796"/>
+      <geometry>
+	    <mesh filename="package://agv_description/meshes/Stl-22-06-2018/caster_wheel.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>	  
+    <inertial>
+      <mass value="0.01"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.012411765597" ixy="-0.000711733678" ixz="0.00050272983" iyy="0.015218160428" iyz="-0.000004273467" izz="0.011763977943"/>
+    </inertial>
+  </link>      
+  <joint name="swivel_${side}_wheel_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="caster_center_wheel_${side}_link"/>
+    <child link="caster_wheel_${side}_link"/>
+  </joint>  
+  </xacro:macro>
+
+</robot>

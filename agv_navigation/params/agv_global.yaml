@@ -1,0 +1,8 @@
+#global
+global_costmap: 
+  global_frame: map
+  robot_base_frame: agv1/base_link
+  static_map: true
+  inflation_layer: 
+    inflation_radius: 0.2
+#    cost scaling factor: 2.58

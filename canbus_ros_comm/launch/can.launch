@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+
+	<node name="topic2can" pkg="canbus_ros_comm" type="topic_to_canbus"/>
+-	<node name="can2topic" pkg="canbus_ros_comm" type="canbus_to_topic"/>
+
+</launch>

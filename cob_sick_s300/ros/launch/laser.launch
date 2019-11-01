@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+	<rosparam file="$(find cob_sick_s300)/ros/test/dummy_config.yaml" command="load"/>
+	<node pkg="cob_sick_s300" type="cob_sick_s300" name="sick_s300"/>
+</launch>

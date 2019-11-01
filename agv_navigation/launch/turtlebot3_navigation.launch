@@ -1,0 +1,43 @@
+<launch>
+  <!-- Arguments -->
+  <!--<arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>-->
+  <arg name="map_file" default="$(find agv_navigation)/map/map1810.yaml"/>
+
+
+  <!-- Turtlebot3 -->
+<!--  <include file="$(find turtlebot3_bringup)/launch/turtlebot3_remote.launch">
+    <arg name="model" value="$(arg model)" />
+  </include>-->
+
+  <!-- Map server -->
+  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
+
+  <!-- AMCL -->
+  <include file="$(find agv_navigation)/launch/turtlebot3_amcl.launch"/>
+
+  <!-- move_base -->
+  <include file="$(find agv_navigation)/launch/turtlebot3_move_base.launch"/>
+
+  <!-- rviz -->
+<!--  <group if="$(arg open_rviz)"> 
+    <node pkg="rviz" type="rviz" name="rviz" required="true"
+          args="-d $(find turtlebot3_navigation)/rviz/turtlebot3_navigation.rviz"/>
+  </group>-->
+
+  <!-- Run tf between map to odom for agv1  -->
+  <node pkg="tf" type="static_transform_publisher" name="map_odom_agv1" args="0 0 0 0 0 0  map agv1/odom 100"/>
+<group ns="/agv1">
+ <param name="tf_prefix" value="agv1"/>
+   <param name="robot_description" command="$(find xacro)/xacro '$(find agv_description)/urdf/agv_body_withshelf.xacro'" />
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <param name="robot_description" command="$(find xacro)/xacro '$(find agv_description)/urdf/agv_body_withshelf.xacro'" />
+  </node>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+<!-- <node pkg="tf" type="static_transform_publisher" name="odom2base" args="0 0 0 0 0 0 agv1/odom agv1/base_link -->
+  </group>
+
+
+  <node pkg="robot" type="initial_pose" name="agv1_init"/>
+
+</launch>

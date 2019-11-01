@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+ <xacro:macro name="agv_joints_state_publisher">    
+	<gazebo>
+        <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
+          <robotNamespace></robotNamespace>
+          <jointName>hub_right_base,hub_right_base,swivel_front_left_wheel_center_joint,chassis_swivel_front_left_joint,swivel_front_right_wheel_center_joint,chassis_swivel_front_right_joint,swivel_back_right_wheel_center_joint,chassis_swivel_back_right_joint,swivel_back_left_wheel_center_joint,chassis_swivel_back_left_joint</jointName>
+          <updateRate>10.0</updateRate>
+          <alwaysOn>true</alwaysOn>
+        </plugin>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:macro name="agv_diff_drive">
+    <gazebo>
+        <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+            <rosDebugLevel>Debug</rosDebugLevel>
+            <robotNamespace></robotNamespace>
+            <publishWheelTF>false</publishWheelTF>
+            <publishOdomTF>true</publishOdomTF>
+            <publishWheelJointState>true</publishWheelJointState>
+            <alwaysOn>true</alwaysOn>
+            <leftJoint>hub_left_base</leftJoint>
+            <rightJoint>hub_right_base</rightJoint>
+            <wheelSeparation>0.71</wheelSeparation>
+            <wheelDiameter>0.25</wheelDiameter>
+            <wheelTorque>20</wheelTorque>
+            <wheelAcceleration>1.8</wheelAcceleration>
+            <commandTopic>cmd_vel</commandTopic>
+            <odometryTopic>odom</odometryTopic>
+            <odometryFrame>odom</odometryFrame>
+            <odometrySource>world</odometrySource>
+            <robotBaseFrame>base_link</robotBaseFrame>
+	    <legacyMode>true</legacyMode>
+	    <publishTf>true</publishTf>
+            <updateRate>100.0</updateRate>
+        </plugin>
+    </gazebo>
+
+  </xacro:macro>
+</robot>
+

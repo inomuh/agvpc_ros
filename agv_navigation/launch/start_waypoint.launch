@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<launch>
+	<node pkg="agv_navigation" type="agv_waypoint_navigation.py" name="agv_waypoint_navigation" output="screen">
+
+    <rosparam file="$(find agv_navigation)/params/agv_waypoints.yaml" command="load"/> 
+    
+	</node>
+</launch>

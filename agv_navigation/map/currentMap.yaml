@@ -1,0 +1,6 @@
+free_thresh: 0.196
+image: /home/hakan/catkin_test/src/agv_mapping_and_navigation/map/currentMap.pgm
+negate: 0
+occupied_thresh: 0.65
+origin: [-0.04999999999999716, -0.04999999999999716, 0.0]
+resolution: 0.05

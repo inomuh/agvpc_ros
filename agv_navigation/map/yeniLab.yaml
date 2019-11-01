@@ -1,0 +1,8 @@
+image: /home/hakan/catkin_ws/src/agv_mapping_and_navigation/map/yeniLab.pgm
+resolution: 0.05
+origin: [-0.19999999999998863, -0.19999999999998863, 0.0]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+
+

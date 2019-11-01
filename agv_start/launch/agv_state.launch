@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find agv_description)/urdf/agv_body_withshelf.xacro'" />
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <param name="robot_description" command="$(find xacro)/xacro.py '$(find agv_description)/urdf/agv_body_withshelf.xacro'" />
+  </node>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+  <node pkg="tf" type="static_transform_publisher" name="odom2base" args="0 0 0 0 0 0  odom base_link  100"/>
+  <node pkg="tf" type="static_transform_publisher" name="laser2base" args="0 0 0 -1.570796 0 0 base_link scan_link 100"/>
+</launch>

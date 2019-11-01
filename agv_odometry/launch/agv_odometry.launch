@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+	<node pkg="agv_odometry" type="agv_odometry"  name="agv_odometry"/>
+</launch>

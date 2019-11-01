@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<robot name="agv" xmlns:xacro="http://ros.org/wiki/xacro">
+
+ <xacro:include filename="$(find agv_description)/urdf/agv_base.xacro"/>
+ <xacro:include filename="$(find agv_description)/urdf/inertia_tensors.xacro"/>	
+ <xacro:include filename="$(find agv_description)/urdf/agv_wheel.xacro"/>
+ <xacro:include filename="$(find agv_description)/urdf/agv_plugin.xacro"/>	
+ <xacro:include filename="$(find agv_description)/urdf/agv_swivel.xacro"/>	
+ 	
+ 
+<xacro:include filename="$(find agv_description)/urdf/agv_shell_withoutshelf.xacro"/>	
+
+	<xacro:agv_base />
+	<xacro:agv_shell />
+	<xacro:agv_swivel xyz_swivel="0.50 -0.275 0.12" rpy_swivel="0 3.1415926 0" xyz_wheel="-0.06 -0.011 0.175" rpy_wheel="1.570796 0 0" side="front_left"/>
+	<xacro:agv_swivel xyz_swivel="0.50 0.275 0.12" rpy_swivel="0 3.1415926 0" xyz_wheel="-0.06 -0.011 0.175" rpy_wheel="1.570796 0 0" side="front_right"/>
+	<xacro:agv_swivel xyz_swivel="-0.50 -0.275 0.12" rpy_swivel="0 3.1415926 0" xyz_wheel="-0.06 -0.011 0.175" rpy_wheel="1.570796 0 0" side="back_left"/>
+	<xacro:agv_swivel xyz_swivel="-0.50 0.275 0.12" rpy_swivel="0 3.1415926 0" xyz_wheel="-0.06 -0.011 0.175" rpy_wheel="1.570796 0 0" side="back_right"/>
+	<xacro:agv_wheel xyz_hub="0 -0.35 0.03" rpy_hub="0 0 0" side="left"/>
+	<xacro:agv_wheel xyz_hub="0 0.35 0.030" rpy_hub="0 0 0" side="right"/>
+	<!-- Motor plugin -->
+	<xacro:agv_diff_drive />
+	<!-- Joints plugin -->
+	<xacro:agv_joints_state_publisher />   	
+</robot>

@@ -1,0 +1,20 @@
+base_global_planner: global_planner/GlobalPlanner
+base_local_planner: dwa_local_planner/DWAPlannerROS
+recovery_behavior_enabled: false
+recovery_behaviour_enabled: false
+
+# global planner
+GlobalPlanner:
+  allow_unknown: true
+  default_tolerance: 0.005
+  visualize_potential: true
+  
+  use_dijkstra: true
+  use_quadratic: true
+  use_grid_path: false
+  old_navfn_behavior: false
+  orientation_mode: 2
+  orientation_window_size: 2
+  neutral cost: 66
+  cost_factor: 0.55
+  lethal_cost: 253

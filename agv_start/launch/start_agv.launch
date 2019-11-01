@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+	<arg name="ns" default="agv1"/> 
+
+<!--	<include file="$(find socketcan_bridge)/launch/socketcan.launch"/>-->
+	<group ns="$(arg ns)">
+		<include file="$(find canbus_ros_comm)/launch/can.launch" />
+		<include file="$(find cob_sick_s300)/ros/launch/laser.launch" />
+<!--		<include file="$(find plab_odometry)/launch/plab.launch" />-->
+		<include file="$(find agv_odometry)/launch/agv_odometry.launch"/>
+<!--		<include file="$(find agv_navigation)/launch/start_navigation.launch"/>-->
+<!--		<include file="$(find agv_smach)/launch/start_smach.launch"/>-->
+	</group>
+</launch>

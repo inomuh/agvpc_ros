@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+   <node name="socketcan_bridge" pkg="socketcan_bridge" type="socketcan_bridge_node">
+	<param name="can_device" value="can1"/>
+   </node>
+</launch>
