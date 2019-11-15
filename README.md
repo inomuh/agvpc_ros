@@ -20,6 +20,8 @@ sudo apt-get install ros-kinetic-socketcan-interface
 
 sudo apt-get install libjsoncpp-dev
 
+sudo apt-get install ros-kinetic-can-msgs
+
 cd <WORKSPACE_NAME>
 
 catkin_make
